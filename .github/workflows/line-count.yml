@@ -1,0 +1,36 @@
+name: Calculate Lines of Code
+
+on:
+  schedule:
+    - cron: '0 0 * * *'  # Runs daily
+  workflow_dispatch: # Allows manual triggering
+
+jobs:
+  count-lines:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repos
+        uses: actions/checkout@v2
+        with:
+          repository: yourusername/yourrepo  # Change to your main GitHub Pages repo
+          token: ${{ secrets.GITHUB_TOKEN }}
+          fetch-depth: 0
+          
+      - name: Install Cloc
+        run: |
+          sudo apt-get install -y cloc
+          
+      - name: Count Lines in Repos
+        run: |
+          echo '{ "total_lines": ' > lines.json
+          cloc --json . | jq .SUM.code >> lines.json
+          echo ' }' >> lines.json
+
+      - name: Push results to GitHub Pages
+        uses: EndBug/add-and-commit@v7
+        with:
+          author_name: "Your GitHub Actions Bot"
+          author_email: "yourbot@example.com"
+          message: "Update line count"
+          add: "lines.json"
