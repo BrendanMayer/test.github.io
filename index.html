@@ -74,14 +74,19 @@
     </section>
 
     <!-- Lines of Code Section -->
-    <div id="line-count"></div>
-<script>
-  fetch("lines.json")
-    .then(response => response.json())
-    .then(data => {
-      document.getElementById("line-count").innerText = `Total Lines of Code: ${data.total_lines}`;
-    });
-</script>
+   
+    <section id="lines-of-code" class="lines-of-code">
+        <h2>Total Lines of Code Written</h2>
+        <div id="line-count"></div>
+        <script>
+          fetch("lines.json")
+            .then(response => response.json())
+            .then(data => {
+              document.getElementById("line-count").innerText = `Total Lines of Code: ${data.total_lines}`;
+            });
+        </script>
+    </div>
+    </section>
 
     <!-- Contact Footer -->
     <footer id="contact" class="footer">
