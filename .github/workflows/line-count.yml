@@ -13,7 +13,7 @@ jobs:
       - name: Checkout Repos
         uses: actions/checkout@v2
         with:
-          repository: yourusername/yourrepo  # Change to your main GitHub Pages repo
+          repository: BrendanMayer/BrendanMayer.github.io  # Change to your main GitHub Pages repo
           token: ${{ secrets.GITHUB_TOKEN }}
           fetch-depth: 0
           
